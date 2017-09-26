@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<body>
+    <div class="root-container">
+        <div class="header">
+            <button id="reverse" onclick="reverseArry()"> 
+                REVERSE
+            </button>
+            <button id="remove-symbols-numbers" onclick="removeSym()"> 
+                REMOVE SYMBOLS & NUMBERS
+            </button>
+            <button id="sort-alphabetically" onclick="sortingArry()"> 
+                SORT ALPHABETICALLLY
+            </button>
+            <button onclick="tglclr()"> 
+                TOGGLE COLOR
+            </button>
+            <button onclick="randomColors()"> 
+                RANDOM COLOR
+            </button>
+            <button onclick="inlineElments()">
+                CONVERT TO INLINE
+            </button>
+        </div>
+        <div class="main">
+            <div class="startups-container" id="contentDiv">
+
+            </div>
+
+        </div>
+        <div class="footer">
+
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<style>
+    .root-container {
+        position: relative;
+    }
+
+    .root-container .header {
+        position: relative;
+    }
+
+    .root-container .main {
+        position: relative;
+    }
+
+    .root-container .footer {
+        position: relative;
+    }
+
+    .startups-container {
+        background-color: gray;
+    }
+
+   .red {
+        background-image: red;
+		color : red;
+    }
+
+    .blue {
+        background-image: blue;
+		color : blue;
+    }
+
+    .gold {
+        background-image: gold;
+		color : gold;
+    }
+	
+	.inline {
+        float: left;
+        padding: .30em;
+    }
+</style>
+
+<script>
+    var colors = ['red', 'blue', 'gold'];
+    var chicagoStartupsHTML = [];
+    var chicagoStartups = [
+        '  Interior   Define  ',
+        'Classkick',
+        'teaBOT  .$',
+        'Pritzker Group Venture Capital',
+        'Teln!yx !!',
+        'ShipBob ~~$$$',
+        'Hologram',
+        'Tovala    ',
+        '    MANOR',
+        'ShuttleCloud 999987',
+        'gtrot @@@@@',
+        'DealsGoRound ****',
+        ' Groovebug',
+        'Stage$$$Bloc',
+        'Shiftgig',
+        'ParkWhiz'
+    ];
+	var toggle_on = true;
+	function loadData(){
+	for(var i = 0, size = chicagoStartups.length; i < size ; i++){
+			var companyName = chicagoStartups[i];	
+			var companyNameWONum = companyName.replace(/[^A-Za-z]/g, '');
+			var htmlData = document.getElementById("contentDiv").innerHTML+"<div>"+companyNameWONum+"</div>";
+		}
+		document.getElementById("contentDiv").innerHTML = htmlData;
+	}
+	
+	
+	//HOMEWORK 1 PROBLEMS START
+    // 1.CREATE A FUNCTION THAT REVERSES THE LIST OF STARTUPS ON CLICK OF THE REVERSE BUTTON
+	function reverseArry(){
+		chicagoStartupsHTML = chicagoStartups.reverse();
+		for(var i = 0, size = chicagoStartupsHTML.length; i < size ; i++){
+			document.getElementById("contentDiv").innerHTML = document.getElementById("contentDiv").innerHTML+"<div>"+chicagoStartupsHTML[i]+"</div>";
+		}
+	}
+	
+	
+	// 2.CREATE A FUNCTION THAT REMOVES ALL SYMBOLS AND NUMBERS FROM COMPANY NAMES ON CLICK OF REMOVE SYMBOLS & NUMBERS BUTTON 
+    //   Stage$$$Bloc => StageBloc
+	function removeSym(){
+		for(var i = 0, size = chicagoStartups.length; i < size ; i++){
+			var companyName = chicagoStartups[i];	
+			var companyNameWONum = companyName.replace(/[^A-Za-z]/g, '');
+			document.getElementById("contentDiv").innerHTML = document.getElementById("contentDiv").innerHTML+"<div>"+companyNameWONum+"</div>";
+		}
+		
+	}
+    
+
+    // 3.CREATE A FUNCTION THAT SORTS STARTUPS IN ALPHABETICAL ORDER ON CLICK OF THE SORT BUTTON
+	function sortingArry(){
+		for(var i = 0, size = chicagoStartups.length; i < size ; i++){
+			var companyName = chicagoStartups[i];	
+			var companyNameWONum = companyName.replace(/[^A-Za-z]/g, '');
+			chicagoStartupsHTML.push(companyNameWONum);
+		}
+		var sortedArry = chicagoStartupsHTML.sort();
+		for(var i = 0, size = sortedArry.length; i < size ; i++){
+			document.getElementById("contentDiv").innerHTML = document.getElementById("contentDiv").innerHTML+"<div>"+sortedArry[i]+"</div>";
+		}
+	}
+	
+	
+    // 4.CREATE A FUNCTION THAT TOGGLES THE BACKGROUND COLOR UPON CLICK OF THE TOGGLE COLOR BUTTON
+	function tglclr(){
+	loadData();
+	if(toggle_on){
+			  document.getElementById("contentDiv").style.backgroundColor ="white";
+			  toggle_on = false;
+			}
+			else{
+			  document.getElementById("contentDiv").style.backgroundColor ="grey";
+			  toggle_on = true;
+			}
+	}
+	
+    // 5.CREATE A FUNCTION THAT RANDOMLY SELECTS A COLOR CLASS AND APPLIES IT TO EACH COMPANY NAME WHEN THE COLOR BUTTON IS CLICKED
+	function randomColors(){
+		var randomnumber = Math.floor(Math.random()*10)>2 ? 0 : Math.floor(Math.random()*10);
+		loadData();
+		var cssCls = colors[randomnumber]
+		document.getElementById('contentDiv').classList.add(cssCls);
+		
+	}
+	
+    // 6.CREATE A FUNCTION THAT DISPLAYS STARTS AS INLINE ELEMENTS ON CLICK OF CONVERT TO INLINE BUTTON
+	function inlineElments(){
+		for(var i = 0, size = chicagoStartups.length; i < size ; i++){
+			var companyName = chicagoStartups[i];	
+			var companyNameWONum = companyName.replace(/[^A-Za-z]/g, '');
+			document.getElementById("contentDiv").innerHTML = document.getElementById("contentDiv").innerHTML+ "   " +companyNameWONum;
+		}
+		document.getElementById('contentDiv').classList.add("inline");
+		
+	}
+    //HOMEWORK 1 PROBLEMS END
+
+</script>
